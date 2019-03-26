@@ -154,7 +154,7 @@ class DigestedCredentials(object):
         qop = self.fields.get('qop', b'auth')
 
         expected = calcResponse(
-            calcHA1(algo, self.username, self.realm, password, nonce, cnonce),
+            calcHA1(algo, self.username, self.realm.encode(), password, nonce, cnonce),
             calcHA2(algo, self.method, uri, qop, None),
             algo, nonce, nc, cnonce, qop)
 
